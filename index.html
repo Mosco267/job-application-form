@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Social Media Handler Application</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
@@ -12,34 +16,40 @@
       padding: 0;
     }
 
-    .container, .thank-you-box {
+    .container,
+    .thank-you-box {
       max-width: 600px;
       margin: 40px auto;
       background: white;
-      padding: 30px;
+      padding: 30px 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h2, h1 {
+    h2,
+    h1 {
       text-align: center;
       color: #1a73e8;
+      margin-bottom: 25px;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 15px;
     }
 
-    button, .back-btn {
+    button,
+    .back-btn {
       background-color: #1a73e8;
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 14px;
       border-radius: 4px;
       cursor: pointer;
       width: 100%;
@@ -47,10 +57,10 @@
       text-align: center;
       text-decoration: none;
       display: block;
-      margin-top: 20px;
     }
 
-    button:hover, .back-btn:hover {
+    button:hover,
+    .back-btn:hover {
       background-color: #0c5cd7;
     }
 
@@ -64,29 +74,56 @@
       margin-top: 15px;
       color: #333;
     }
+
+    @media (max-width: 480px) {
+      .container,
+      .thank-you-box {
+        margin: 20px 10px;
+        padding: 20px 15px;
+      }
+
+      input,
+      textarea,
+      select {
+        font-size: 14px;
+      }
+
+      button,
+      .back-btn {
+        font-size: 15px;
+        padding: 12px;
+      }
+
+      h2, h1 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Application Form -->
   <div class="container" id="formContainer">
     <h2>Apply – Social Media Handler</h2>
     <form id="jobForm">
-      <input type="hidden" name="_cc" value="apply@hiringunit.site">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_cc" value="apply@hiringunit.site" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="box" />
 
       <label>Full Name:</label>
-      <input type="text" name="Full Name" placeholder="Full Name" required>
+      <input type="text" name="Full Name" required />
 
       <label>Email Address:</label>
-      <input type="email" name="Email" placeholder="Email" required>
+      <input type="email" name="Email" required />
 
-      <label>Phone Number:</label>
-      <input type="tel" name="Phone"Number placeholder="Number" required>
+      <label>Phone Number (WhatsApp):</label>
+      <input type="tel" name="Phone" required />
 
       <label>Location (City & Country):</label>
-      <input type="text" name="Location" placeholder="Location" required>
+      <input type="text" name="Location" required />
 
       <label>Gender:</label>
       <select name="Gender" required>
@@ -97,7 +134,7 @@
       </select>
 
       <label>Age:</label>
-      <input type="number" name="Age" placeholder="Age" required>
+      <input type="number" name="Age" required />
 
       <label>Experience Managing Social Media?</label>
       <select name="Experience" required>
@@ -106,14 +143,19 @@
         <option>No</option>
       </select>
 
-      <label>What platforms are you familiar with?</label>
-      <input type="text" name="Platforms" required placeholder="e.g. Instagram, TikTok, Twitter">
+      <label>What platforms have you worked on?</label>
+      <input
+        type="text"
+        name="Platforms"
+        required
+        placeholder="e.g. Instagram, TikTok, Twitter"
+      />
 
       <label>Links to pages/accounts you've managed:</label>
-      <textarea name="Portfolio Links" rows="4" placeholder="Optional"></textarea>
+      <textarea name="Portfolio Links" rows="4" required></textarea>
 
       <label>Why should we hire you?</label>
-      <textarea name="Pitch" rows="4" placeholder="Reasons" required></textarea>
+      <textarea name="Pitch" rows="4" required></textarea>
 
       <button type="submit">Submit Application</button>
     </form>
@@ -122,17 +164,20 @@
   <!-- Thank You Message -->
   <div class="thank-you-box" id="thankYouBox">
     <h1>Thank You!</h1>
-    <p>Your application has been submitted successfully. We will contact you as soon as possible for the next step.</p>
+    <p>
+      Your application has been submitted successfully. We will contact you if
+      you're shortlisted.
+    </p>
     <a href="#" class="back-btn" onclick="goBackToForm()">Back to Application</a>
   </div>
 
   <script>
-    const form = document.getElementById('jobForm');
-    const formContainer = document.getElementById('formContainer');
-    const thankYouBox = document.getElementById('thankYouBox');
+    const form = document.getElementById("jobForm");
+    const formContainer = document.getElementById("formContainer");
+    const thankYouBox = document.getElementById("thankYouBox");
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault(); // Stop default
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent default submission
 
       const formData = new FormData(form);
 
@@ -140,29 +185,36 @@
         method: "POST",
         body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          Accept: "application/json",
+        },
       })
-      .then(response => {
-        if (response.ok) {
-          formContainer.style.display = 'none';
-          thankYouBox.style.display = 'block';
-          form.reset();
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(error => {
-        alert("An error occurred.");
-        console.error(error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            formContainer.style.display = "none";
+            thankYouBox.style.display = "block";
+            form.reset();
+          } else {
+            alert("Submission failed. Please try again.");
+          }
+        })
+        .catch((error) => {
+          alert("An error occurred.");
+          console.error(error);
+        });
     });
 
     function goBackToForm() {
-      thankYouBox.style.display = 'none';
-      formContainer.style.display = 'block';
+      thankYouBox.style.display = "none";
+      formContainer.style.display = "block";
     }
   </script>
-
 </body>
 </html>
+
+    
+    
+      
+     
+    
+       
+       
